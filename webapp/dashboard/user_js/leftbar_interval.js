@@ -1,12 +1,5 @@
 // ============ LOAD DASH
 
-var html='  <li> \
-                    <a href="name"> \
-                        <i class="logo"></i> \
-                        <p>name</p> \
-                    </a> \
-                </li>'
-                
 var user='  <li class="active-pro"> \
                     <a> \
                         <i class="pe-7s-rocket"></i> \
@@ -14,32 +7,13 @@ var user='  <li class="active-pro"> \
                     </a> \
                 </li>'
                 
-var request2 = new XMLHttpRequest()
-request2.open('GET', '/api/dashboard_item', true);
-request2.onload = function () {
+var request = new XMLHttpRequest()
+request.open('GET', '/api/current_user', true);
+request.onload = function () {
     var obj = JSON.parse(this.response);
-    var temp_html="";
-    obj.forEach(function(e) {
-        if (window.location.href.includes(e.name)){
-            temp_html += html.replace("name",e.name).replace("name",e.name).replace("logo",e.icon).replace("<li>","<li class=\"active\">");
-        }else{
-            temp_html += html.replace("name",e.name).replace("name",e.name).replace("logo",e.icon);
-        }
-    });
-    temp_html += user
-    document.getElementById('dash').innerHTML = temp_html;
-    var request = new XMLHttpRequest()
-    request.open('GET', '/api/current_user', true);
-    request.onload = function () {
-        var obj = JSON.parse(this.response);
-        document.getElementById('hi_user').innerHTML = 'Hello ! ' + obj[0].name;
-    }
-    request.send();
+    document.getElementById('dash').innerHTML = user.replace("Welcome", 'Hello ! ' + obj[0].firstname);
 }
-request2.send();
-
-
-
+request.send();
 
 
 setInterval(function(){

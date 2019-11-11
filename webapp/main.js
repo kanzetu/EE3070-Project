@@ -88,7 +88,7 @@ app.post('/auth', function(request, response) {
 				request.session.loggedin = true;
 				request.session.username = username;
 				request.session.permission = results[0].permission;
-				response.redirect(results[0].root_path);
+				response.redirect("/");
 			} else {
 			    var sql = "INSERT INTO login_log (user_name, user_pw,ip, success) VALUES ('"+ username +"', '"+password+"','"+ ip +"', 0)";
 			    conn.query(sql, function (err, result) {if (err) throw err});
