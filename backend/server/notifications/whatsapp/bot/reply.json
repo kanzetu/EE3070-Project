@@ -1,0 +1,16 @@
+{
+    "replys": [
+        {
+            "indicater": "/hi",
+            "text": "Hello~"
+        },
+        {
+            "indicater": "/bye",
+            "text": "886~"
+        },
+        {
+            "indicater": "/dht",
+            "text": "DHT sensor value"
+        }
+    ]
+}
