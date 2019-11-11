@@ -52,7 +52,7 @@ exports.disconnect_handler =  disconnect_handler;
 
 
 app.use(session({
-	secret: 'fasf12312ASDasd',
+	secret: 'd7d0b1d404f9b69415622290fef6242c',
 	resave: true,
 	saveUninitialized: true
 }));
@@ -81,7 +81,7 @@ app.post('/auth', function(request, response) {
 	var password = request.body.password;
 	var ip = request.headers['x-real-ip'] || request.connection.remoteAddress;
 	if (username && password) {
-		conn.query('SELECT * FROM user WHERE username = ? AND password = ?', [username, crypto.createHash('sha256').update(password).digest('base64')], function(error, results, fields) {
+		conn.query('SELECT * FROM staff WHERE web_username = ? AND web_password = ?', [username, crypto.createHash('sha256').update(password).digest('base64')], function(error, results, fields) {
 			if (results.length > 0) {
 			    var sql = "INSERT INTO login_log (user_name, ip,success) VALUES ('" +username +"','"+ ip +"', 1)";
 			    conn.query(sql, function (err, result) {if (err) throw err});
@@ -156,9 +156,8 @@ app.get('/dashboard', function (req, res,next) {
 //****************************************** API ********************************************************
 
 app.get('/api/current_user', function (req, res) {
-    var sql = 'SELECT p.name FROM profile p\
-                INNER JOIN user u ON  p.user_id = u.id\
-                WHERE u.username="' + req.session.username + '"'
+    var sql = 'SELECT * FROM staff s\
+                WHERE s.web_username="' + req.session.username + '"'
     conn.query(sql, function (error, results, fields) {
         res.send(results);
     });
