@@ -14,7 +14,7 @@ int main(int argc, char** argv)
     int FACE_DOWNSAMPLE_RATIO = 3;
     int SKIP_FRAMES = 10;
     int opt;
-    const char *optstring = "p:r:s:"; // 有三个选项-abc，其中c选项后有冒号，所以后面必须有参数
+    const char *optstring = "p:r:s:"; 
     while ((opt = getopt(argc, argv, optstring)) != -1) {
         switch (opt) {
             case 'p':
